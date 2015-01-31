@@ -1,4 +1,5 @@
 (function () {
+	//wtf git
     var merge = function (a, b) {
         if(typeof b != 'object') return b;
         for(var key in b) {
