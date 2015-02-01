@@ -1,5 +1,6 @@
 (function () {
-
+    //merge function: merges two objects together.
+    //if the key exists in A, don't override it.
     var merge = function (a, b) {
         if(typeof b != 'object') return b;
         for(var key in b) {
@@ -8,6 +9,15 @@
         return a;
     };
 
+    /* 
+        the Drawer constructor
+        all it does is set up the properties that will be used later
+        It grabs args.canvas,
+        args.width,
+        args.height
+        and that should be it.
+        and also, if the args.canvas is a DOM Node, appends to the body
+    */
     function Drawer (args) {
         this._args = args;
         this.canvas = typeof args.canvas === 'string' ? document.querySelector(args.canvas) : document.createElement('canvas');
@@ -19,6 +29,10 @@
         }
     };
     
+    //registers a name in the current instance,
+    //this name is a object with 'draw' and 'addEventListener' properties
+    //the 'draw' method calls up drawFn with the canvas2dcontext as the 'this' of the function
+    //the addEventListener, well... it does what you think it does.
     Drawer.prototype.register = function (name, args, drawFn) {
         var defaults = typeof args === 'object' && args.reduce(function (def, cur) {
             if(typeof cur === 'string') {
@@ -40,8 +54,11 @@
             }
         } : args;
     };
+    //binds a event onto the canvas element
     Drawer.prototype.addEventListener = function (event, fn) {
         return this.canvas.addEventListener(event, fn);
     }
+    
+    //expose our hand-crafted helper Drawer
     window.Drawer = Drawer;
 })();
