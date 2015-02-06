@@ -24,15 +24,20 @@
         this.canvas.width = args.width;
         this.canvas.height = args.height;
         this.context = this.canvas.getContext('2d');
-        if(typeof args.canvas !== 'string') {
-            document.body.appendChild(this.canvas);
+        if(typeof args.canvas !== 'string' && this.canvas.nodeType) {
+            try {
+                document.body.appendChild(this.canvas);
+            } catch(e) {
+                //we didn't fucked up, you did. *insanity wolf*
+                throw new Error("ERROR: Cannot append to body.");
+            }
         }
     };
     
-    //registers a name in the current instance,
-    //this name is a object with 'draw' and 'addEventListener' properties
-    //the 'draw' method calls up drawFn with the canvas2dcontext as the 'this' of the function
-    //the addEventListener, well... it does what you think it does.
+    // registers a name in the current instance,
+    // this name is a object with 'draw' and 'addEventListener' properties
+    // the 'draw' method calls up drawFn with the canvas2dcontext as the 'this' of the function
+    // the addEventListener, well... it does what you think it does.
     Drawer.prototype.register = function (name, args, drawFn) {
         var defaults = typeof args === 'object' && args.reduce(function (def, cur) {
             if(typeof cur === 'string') {
@@ -42,7 +47,6 @@
             }
             return def;
         }, {});
-        var holder = [];
         var context = this.context;
         var that = this;
         this[name] = typeof args === 'object' ? {
@@ -54,18 +58,17 @@
             }
         } : args;
     };
-    //binds a event onto the canvas element
+    // binds a event onto the canvas element
     Drawer.prototype.addEventListener = function (event, fn) {
         return this.canvas.addEventListener(event, fn);
     };
     
     
-    //small helpers for simple objects
-    
+    // small helpers for simple objects
     Drawer.coordinates = [['x', 0], ['y', 0]];
     Drawer.circle = [coordinates, ['radius', 10], 'startAngle', ['endAngle', Math.PI * 2]];
     Drawer.square = [coordinates, ['width', 100], ['height', 100]];
     
-    //expose our hand-crafted helper Drawer
+    // expose our hand-crafted helper Drawer
     window.Drawer = Drawer;
 })();
