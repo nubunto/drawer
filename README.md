@@ -24,3 +24,11 @@ For instance:
       console.log(circle.x);
       // this is the 2d context of the canvas object.
     });
+
+`d.[name].draw(obj)`
+--------------------
+The name you passed to `d.register` will be available as a method on that particular instance. With it, you can pass an POJO and it will call the previous defined `drawFn` with any default arguments you provided back in the `d.register` call.
+
+`d.[name].addEventListener(event, fn)`
+--------------------------------------
+Will register the `event` with the `fn` as callback in the `canvas` element of the Drawer object.
