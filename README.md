@@ -10,7 +10,7 @@ Note: API might change.
 Creates a new Drawer object, where args is a POJO (Plain Old JS Object) with the following keys:
 * `string canvas`: Selector for a HTMLCanvasObject
 * `int width` : Width of the canvas
-* `int height`: Height of the 
+* `int height`: Height of the canvas 
 
 `d.register(name, args, drawFn(compiledArgs))`
 --------------------------------
@@ -22,4 +22,5 @@ For instance:
     d.register('circle', ['x', 'y', ['radius', 100], 'startAngle', ['endAngle', Math.PI*2]], function(circle) {
       // get the x with circle.x, y with circle.y, etc...
       console.log(circle.x);
+      // this is the 2d context of the canvas object.
     });
