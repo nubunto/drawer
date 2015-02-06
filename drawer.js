@@ -42,7 +42,6 @@
             }
             return def;
         }, {});
-        var holder = [];
         var context = this.context;
         var that = this;
         this[name] = typeof args === 'object' ? {
