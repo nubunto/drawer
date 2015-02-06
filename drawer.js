@@ -57,7 +57,14 @@
     //binds a event onto the canvas element
     Drawer.prototype.addEventListener = function (event, fn) {
         return this.canvas.addEventListener(event, fn);
-    }
+    };
+    
+    
+    //small helpers for simple objects
+    
+    Drawer.coordinates = [['x', 0], ['y', 0]];
+    Drawer.circle = [coordinates, ['radius', 10], 'startAngle', ['endAngle', Math.PI * 2]];
+    Drawer.square = [coordinates, ['width', 100], ['height', 100]];
     
     //expose our hand-crafted helper Drawer
     window.Drawer = Drawer;
