@@ -32,3 +32,8 @@ The name you passed to `d.register` will be available as a method on that partic
 `d.[name].addEventListener(event, fn)`
 --------------------------------------
 Will register the `event` with the `fn` as callback in the `canvas` element of the Drawer object.
+
+
+# TODO
+* Make an proxy for an easy-to-work-with object for drawing
+* Stop pretending we live a standards complying world and add more checks and polyfills
