@@ -3,6 +3,7 @@
     //if the key exists in A, don't override it.
     var merge = function (a, b) {
         if(typeof b != 'object') return b;
+        if(!a) return b;
         for(var key in b) {
             if(!(key in a)) a[key] = b[key];
         }
@@ -19,6 +20,7 @@
         and also, if the args.canvas is a DOM Node, appends to the body
     */
     function Drawer (args) {
+        args = merge(args, {canvas: null, width: 100, height: 100});
         this._args = args;
         this.canvas = typeof args.canvas === 'string' ? document.querySelector(args.canvas) : document.createElement('canvas');
         this.canvas.width = args.width;
@@ -58,16 +60,11 @@
             }
         } : args;
     };
+    
     // binds a event onto the canvas element
     Drawer.prototype.addEventListener = function (event, fn) {
         return this.canvas.addEventListener(event, fn);
     };
-    
-    
-    // small helpers for simple objects
-    Drawer.coordinates = [['x', 0], ['y', 0]];
-    Drawer.circle = [coordinates, ['radius', 10], 'startAngle', ['endAngle', Math.PI * 2]];
-    Drawer.square = [coordinates, ['width', 100], ['height', 100]];
     
     // expose our hand-crafted helper Drawer
     window.Drawer = Drawer;
